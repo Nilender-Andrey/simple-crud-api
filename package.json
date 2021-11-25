@@ -4,7 +4,8 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
     "lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx, json}\"",
     "start:dev": "webpack --watch --mode development",
     "start:prod": "webpack --mode production && node ./dist/bundle.js"
@@ -24,7 +25,9 @@
     "eslint": "^8.3.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.3",
+    "jest": "^27.3.1",
     "nodemon-webpack-plugin": "^4.6.0",
+    "supertest": "^6.1.6",
     "webpack": "^5.64.2",
     "webpack-cli": "^4.9.1"
   },
