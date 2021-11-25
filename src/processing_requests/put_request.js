@@ -1,16 +1,26 @@
 const db = require('../bd');
 const getBody = require('../helpers/get_body');
 const errors = require('../helpers/errors');
+const idValidation = require('../helpers/id_validation');
 
 module.exports = async function putRequest(req, id, res) {
-  if (!id) errors('ID_NOT_SPECIFIED', res);
+  if (!id) {
+    errors('ID_NOT_SPECIFIED', res);
+    return false;
+  }
+  if (!idValidation(id)) {
+    errors('ID INVALID', res);
+    return false;
+  }
 
   const body = await getBody(req);
-  let index = db.findIndex((item) => item.id === id);
+  const index = db.findIndex((item) => item.id === id);
 
   db[index] = { ...db[index], ...body };
 
-  return index !== -1
-    ? [200, db[index], ['Content-Type', 'application/json']]
-    : errors('ID_NOT_FOUND', res);
+  if (index === -1) {
+    errors('ID_NOT_FOUND', res);
+    return false;
+  }
+  return [200, db[index], ['Content-Type', 'application/json']];
 };

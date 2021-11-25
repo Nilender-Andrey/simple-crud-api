@@ -1,27 +1,24 @@
-const http = __non_webpack_require__('http');
-const url = __non_webpack_require__('url');
+const http = require('http');
+const url = require('url');
+require('dotenv').config();
 
 const processingRequests = require('./processing_requests');
-const formResponse = require('./helpers/form_a_response');
+const formAResponse = require('./helpers/form_a_response');
 const errors = require('./helpers/errors');
-
-const PORT = 3000;
 
 const server = http.createServer((req, res) => {
   const urlReq = url.parse(req.url);
   const pathname = urlReq.pathname.replace('/', '').split('/')[0];
   const id = urlReq.pathname.replace('/', '').split('/')[1];
-  const method = req.method;
+  const { method } = req;
 
   if (pathname === 'person') {
-    processingRequests(method, id, req, res).then((data) =>
-      formResponse(data, res)
-    );
+    processingRequests(method, id, req, res).then((data) => formAResponse(data, res));
   } else {
     errors('PAGE_NOT_FOUND', res);
   }
 });
 
-server.listen(PORT, (error) => {
-  error ? console.log(error) : console.log('Listening port 3000');
+server.listen(process.env.PORT, (error) => {
+  error ? console.log(error) : console.log(`Listening port ${process.env.PORT}`);
 });

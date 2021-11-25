@@ -1,0 +1,61 @@
+{
+  "env": {
+    "commonjs": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["airbnb-base"],
+
+  "parserOptions": {
+    "ecmaVersion": 13,
+    "sourceType": "module"
+  },
+
+  // разрешает импорты
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  // добовляе NodeJS
+  "globals": {
+    "NodeJS": true
+  },
+
+  "rules": {
+    "operator-linebreak": "off",
+    "no-restricted-syntax": "off",
+    // разрешает тернарный оператор
+    "no-unused-expressions": [2, { "allowShortCircuit": true, "allowTernary": true }],
+
+    //отключает ошибку неиспользуемых переменных
+    "no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "[I]\\w+"
+      }
+    ],
+    /***********************************************************/
+
+    //Отключает запрет использование переменных до их определения
+    "no-use-before-define": "off",
+
+    /***********************************************************/
+
+    //разрешает импорты без разширений
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+    /***********************************************************/
+  }
+}

@@ -1,12 +1,22 @@
 const db = require('../bd');
 const errors = require('../helpers/errors');
+const idValidation = require('../helpers/id_validation');
 
-module.exports = function (id, res) {
+module.exports = function getRequest(id, res) {
   if (id) {
-    let results = db.filter((item) => item.id === id);
+    if (!idValidation(id)) {
+      errors('ID INVALID', res);
+      return false;
+    }
 
-    if (results.length)
-      return [200, ...results, ['Content-Type', 'application/json']];
-    else errors('ID_NOT_FOUND', res);
-  } else return [200, db, ['Content-Type', 'application/json']];
+    const results = db.filter((item) => item.id === id);
+
+    if (!results.length) {
+      errors('ID_NOT_FOUND', res);
+      return false;
+    }
+    return [200, ...results, ['Content-Type', 'application/json']];
+  }
+
+  return [200, db, ['Content-Type', 'application/json']];
 };

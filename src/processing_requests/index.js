@@ -9,9 +9,9 @@ module.exports = async function processingRequests(method, id, req, res) {
     case 'GET':
       return getRequest(id, res);
     case 'POST':
-      return await postRequest(req, res);
+      return postRequest(req, res);
     case 'PUT':
-      return await putRequest(req, id, res);
+      return putRequest(req, id, res);
     case 'DELETE':
       return deleteRequest(id, res);
     default:

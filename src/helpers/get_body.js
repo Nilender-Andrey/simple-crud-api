@@ -1,5 +1,6 @@
-module.exports = async function getBody(req, cb) {
+module.exports = async function getBody(req) {
   const buffers = [];
+  let result;
 
   for await (const chunk of req) {
     buffers.push(chunk);
@@ -9,5 +10,11 @@ module.exports = async function getBody(req, cb) {
 
   await req.on('end', () => {});
 
-  return JSON.parse(data);
+  try {
+    result = JSON.parse(data);
+  } catch (error) {
+    return false;
+  }
+
+  return result;
 };
