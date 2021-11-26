@@ -26,7 +26,7 @@ The default port is 3000
    1. In the first terminal, run the server (`npm run start:dev`)
    2. Open the second terminal and run tests (`npm run test:coverage`)
 
-   /---------------------------/
+---
 
 #### Установка:
 

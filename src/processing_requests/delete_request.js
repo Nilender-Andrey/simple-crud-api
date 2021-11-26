@@ -17,7 +17,7 @@ module.exports = function deleteRequest(id, res) {
   if (index !== -1) {
     db.splice(index, 1);
 
-    return [204, null, ['Content-Type', 'application/json']];
+    return [204, null, { 'Content-Type': 'application/json' }];
   }
   errors('ID_NOT_FOUND', res);
   return false;

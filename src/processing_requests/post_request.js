@@ -18,7 +18,7 @@ module.exports = async function postRequest(req, res) {
     body.id = uuidv4();
     db.push(body);
 
-    return [201, body, ['Content-Type', 'application/json']];
+    return [201, body, { 'Content-Type': 'application/json' }];
   }
   errors('REQUEST_FAILED', res);
   return false;

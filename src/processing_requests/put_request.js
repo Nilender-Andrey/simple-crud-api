@@ -22,5 +22,5 @@ module.exports = async function putRequest(req, id, res) {
     errors('ID_NOT_FOUND', res);
     return false;
   }
-  return [200, db[index], ['Content-Type', 'application/json']];
+  return [200, db[index], { 'Content-Type': 'application/json' }];
 };

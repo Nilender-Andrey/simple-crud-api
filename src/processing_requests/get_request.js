@@ -15,8 +15,8 @@ module.exports = function getRequest(id, res) {
       errors('ID_NOT_FOUND', res);
       return false;
     }
-    return [200, ...results, ['Content-Type', 'application/json']];
+    return [200, ...results, { 'Content-Type': 'application/json' }];
   }
 
-  return [200, db, ['Content-Type', 'application/json']];
+  return [200, db, { 'Content-Type': 'application/json' }];
 };

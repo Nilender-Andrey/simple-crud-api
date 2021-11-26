@@ -3,8 +3,7 @@ module.exports = function formAResponse(data, res) {
     const [statusCode, body, setHeader] = data;
 
     const answer = [
-      res.setHeader(...setHeader),
-      (res.statusCode = statusCode),
+      res.writeHead(statusCode, setHeader),
       res.write(JSON.stringify(body)),
       res.end(),
     ];
