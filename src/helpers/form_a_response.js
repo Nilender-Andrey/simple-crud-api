@@ -1,4 +1,4 @@
-module.exports = function formAResponse(data, res) {
+module.exports = function formAResponse(res, cbError, data) {
   if (data) {
     const [statusCode, body, setHeader] = data;
 
@@ -10,5 +10,5 @@ module.exports = function formAResponse(data, res) {
 
     return answer;
   }
-  return false;
+  return cbError('FALED_RESPONSE');
 };

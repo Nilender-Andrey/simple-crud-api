@@ -16,13 +16,14 @@ function validationOfProperties(obj) {
       }
     }
   }
+
   return true;
 }
 
 module.exports = function objectValidation(obj) {
   const permissibleProperties = ['name', 'age', 'hobbies'];
 
-  const absentProperties = permissibleProperties.find((item) => item === undefined);
+  const absentProperties = permissibleProperties.find((item) => obj[item] === undefined);
 
   const resValidationOfProperties = validationOfProperties(obj);
 

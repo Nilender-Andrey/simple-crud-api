@@ -1,9 +1,9 @@
-const server = require('../src/index');
 const request = require('supertest');
 
 const API = 'http://localhost:3000';
 
-describe('scenarios from the task', () => {
+describe('scenarios: from the task', () => {
+  let id;
   test('GET request for /person, result equals []', async () => {
     const result = await request(API).get('/person');
     expect(result.status).toBe(200);
@@ -13,11 +13,11 @@ describe('scenarios from the task', () => {
   test('POST request for /person, result equals created object', async () => {
     const result = await request(API)
       .post('/person')
-      .send({ name: 'test', ege: 1, hobbies: ['hobbies_1'] });
+      .send({ name: 'test', age: 1, hobbies: ['hobbies_1'] });
     expect(result.status).toBe(201);
     expect(result.body).toMatchObject({
       name: 'test',
-      ege: 1,
+      age: 1,
       hobbies: ['hobbies_1'],
     });
 
@@ -29,7 +29,7 @@ describe('scenarios from the task', () => {
     expect(result.status).toBe(200);
     expect(result.body).toMatchObject({
       name: 'test',
-      ege: 1,
+      age: 1,
       hobbies: ['hobbies_1'],
       id: `${id}`,
     });
@@ -38,12 +38,12 @@ describe('scenarios from the task', () => {
   test('PUT request for /person, result equals updated object', async () => {
     const result = await request(API)
       .put(`/person/${id}`)
-      .send({ name: 'test_2', ege: 2, hobbies: ['hobbies_2'] });
+      .send({ name: 'test_2', age: 2, hobbies: ['hobbies_2'] });
 
     expect(result.status).toBe(200);
     expect(result.body).toMatchObject({
       name: 'test_2',
-      ege: 2,
+      age: 2,
       hobbies: ['hobbies_2'],
       id: `${id}`,
     });

@@ -2,19 +2,18 @@ const getRequest = require('./get_request');
 const deleteRequest = require('./delete_request');
 const postRequest = require('./post_request');
 const putRequest = require('./put_request');
-const errors = require('../helpers/errors');
 
-module.exports = async function processingRequests(method, id, req, res) {
+module.exports = async function processingRequests(method, id, req, cbAnswer, cbError) {
   switch (method) {
     case 'GET':
-      return getRequest(id, res);
+      return getRequest(id, cbAnswer, cbError);
     case 'POST':
-      return postRequest(req, res);
+      return postRequest(req, cbAnswer, cbError);
     case 'PUT':
-      return putRequest(req, id, res);
+      return putRequest(req, id, cbAnswer, cbError);
     case 'DELETE':
-      return deleteRequest(id, res);
+      return deleteRequest(id, cbAnswer, cbError);
     default:
-      return errors('WRONG_METHOD', res);
+      return cbError('WRONG_METHOD');
   }
 };

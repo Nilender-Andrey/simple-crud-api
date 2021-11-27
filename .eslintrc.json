@@ -2,12 +2,13 @@
   "env": {
     "commonjs": true,
     "es2021": true,
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
   "extends": ["airbnb-base"],
 
   "parserOptions": {
-    "ecmaVersion": 13,
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
 
@@ -24,7 +25,6 @@
     "NodeJS": true
   },
 
-  "files": ["src/**/*.js"],
   "rules": {
     "operator-linebreak": "off",
     "no-restricted-syntax": "off",

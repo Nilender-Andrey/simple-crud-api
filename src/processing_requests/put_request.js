@@ -1,16 +1,13 @@
 const db = require('../bd');
 const getBody = require('../helpers/get_body');
-const errors = require('../helpers/errors');
 const idValidation = require('../helpers/id_validation');
 
-module.exports = async function putRequest(req, id, res) {
+module.exports = async function putRequest(req, id, cbAnswer, cbError) {
   if (!id) {
-    errors('ID_NOT_SPECIFIED', res);
-    return false;
+    return cbError('ID_NOT_SPECIFIED');
   }
   if (!idValidation(id)) {
-    errors('ID INVALID', res);
-    return false;
+    return cbError('ID INVALID');
   }
 
   const body = await getBody(req);
@@ -19,8 +16,8 @@ module.exports = async function putRequest(req, id, res) {
   db[index] = { ...db[index], ...body };
 
   if (index === -1) {
-    errors('ID_NOT_FOUND', res);
-    return false;
+    return cbError('ID_NOT_FOUND');
+  } else {
+    return cbAnswer([200, db[index], { 'Content-Type': 'application/json' }]);
   }
-  return [200, db[index], { 'Content-Type': 'application/json' }];
 };

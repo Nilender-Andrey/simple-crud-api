@@ -6,7 +6,9 @@ const VALIDATION_FAILED = 'VALIDATION_FAILED';
 const REQUEST_FAILED = 'REQUEST_FAILED';
 const ID_INVALID = 'ID INVALID';
 
-module.exports = function errors(err, res) {
+const SERVER_ERROR = 'SERVER_ERROR';
+
+module.exports = function errors(res, err) {
   let message = '';
   let error = 404;
   switch (err) {
@@ -20,7 +22,7 @@ module.exports = function errors(err, res) {
       message = 'Message: you specified the wrong method';
       break;
     case PAGE_NOT_FOUND:
-      message = 'Message: the url you requested does not exist';
+      message = 'Message: route not found';
       break;
     case VALIDATION_FAILED:
       error = 400;
@@ -31,9 +33,18 @@ module.exports = function errors(err, res) {
       error = 400;
       message = 'Message: failed to process the request, check the entered data';
       break;
+
+    case REQUEST_FAILED:
+      message = 'Message: failed to generate response';
+      break;
+
     case ID_INVALID:
       error = 400;
       message = 'Message: id invalid';
+      break;
+    case SERVER_ERROR:
+      error = 500;
+      message = 'Message: server error';
       break;
     default:
       break;
