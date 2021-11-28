@@ -20,7 +20,7 @@ const server = http.createServer((req, res) => {
   } else {
     cbError('PAGE_NOT_FOUND');
   }
-
+  process.removeAllListeners('uncaughtException');
   process.on('uncaughtException', function (e) {
     cbError('SERVER_ERROR');
   });

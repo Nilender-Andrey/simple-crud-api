@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "test": "jest --runInBand",
-    "test:coverage": "jest --runInBand --coverage",
+    "test:coverage": "jest --coverage --runInBand ",
     "lint": "eslint --fix \"./src/**/*.{js,jsx,ts,tsx, json}\"",
     "start:dev": "webpack --watch --mode development",
     "start:prod": "webpack --mode production && node ./dist/bundle.js"

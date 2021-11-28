@@ -5,7 +5,7 @@ const ID_NOT_SPECIFIED = 'ID_NOT_SPECIFIED';
 const VALIDATION_FAILED = 'VALIDATION_FAILED';
 const REQUEST_FAILED = 'REQUEST_FAILED';
 const ID_INVALID = 'ID INVALID';
-
+const FALED_RESPONSE = 'FALED_RESPONSE';
 const SERVER_ERROR = 'SERVER_ERROR';
 
 module.exports = function errors(res, err) {
@@ -33,11 +33,9 @@ module.exports = function errors(res, err) {
       error = 400;
       message = 'Message: failed to process the request, check the entered data';
       break;
-
-    case REQUEST_FAILED:
+    case FALED_RESPONSE:
       message = 'Message: failed to generate response';
       break;
-
     case ID_INVALID:
       error = 400;
       message = 'Message: id invalid';
